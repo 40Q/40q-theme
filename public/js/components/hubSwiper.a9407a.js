@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_roots_bud_sage_ueno_theme=self.webpackChunk_roots_bud_sage_ueno_theme||[]).push([[472],{},e=>{e.O(0,[259,855],(()=>{return s="./scripts/frontend/components/hubSwiper.ts",e(e.s=s);var s}));e.O()}]);

@@ -1,0 +1,113 @@
+{
+  "app": {
+    "js": [
+      "js/runtime.fcc0e4.js",
+      "js/259.958628.js",
+      "js/439.fbfd4a.js",
+      "js/285.3f62f0.js",
+      "js/917.145b89.js",
+      "js/703.9820c7.js",
+      "js/460.322af7.js",
+      "js/500.b1a1a7.js",
+      "js/855.cb8a41.js",
+      "js/983.c17b19.js",
+      "js/131.7bfabe.js",
+      "js/app.0f9768.js"
+    ],
+    "css": [
+      "css/app.994ca2.css"
+    ],
+    "dependencies": []
+  },
+  "editor": {
+    "js": [
+      "js/runtime.fcc0e4.js",
+      "js/606.0b8637.js",
+      "js/editor.acdf2d.js"
+    ],
+    "css": [
+      "css/editor.108c42.css"
+    ],
+    "dependencies": [
+      "react",
+      "wp-data",
+      "wp-blocks",
+      "wp-rich-text",
+      "wp-plugins",
+      "wp-hooks",
+      "wp-block-editor",
+      "wp-components",
+      "wp-i18n",
+      "wp-api-fetch",
+      "wp-element"
+    ]
+  },
+  "components/accordion": {
+    "js": [
+      "js/runtime.fcc0e4.js",
+      "js/439.fbfd4a.js",
+      "js/131.7bfabe.js",
+      "js/components/accordion.172d3c.js"
+    ],
+    "dependencies": []
+  },
+  "components/featureScroller": {
+    "js": [
+      "js/runtime.fcc0e4.js",
+      "js/917.145b89.js",
+      "js/components/featureScroller.f18152.js"
+    ],
+    "dependencies": []
+  },
+  "components/footerAccordion": {
+    "js": [
+      "js/runtime.fcc0e4.js",
+      "js/460.322af7.js",
+      "js/components/footerAccordion.37e72b.js"
+    ],
+    "dependencies": []
+  },
+  "components/form": {
+    "js": [
+      "js/runtime.fcc0e4.js",
+      "js/285.3f62f0.js",
+      "js/components/form.8bb9b9.js"
+    ],
+    "dependencies": []
+  },
+  "components/hubSwiper": {
+    "js": [
+      "js/runtime.fcc0e4.js",
+      "js/259.958628.js",
+      "js/855.cb8a41.js",
+      "js/components/hubSwiper.a9407a.js"
+    ],
+    "dependencies": []
+  },
+  "components/list-item": {
+    "js": [
+      "js/runtime.fcc0e4.js",
+      "js/439.fbfd4a.js",
+      "js/983.c17b19.js",
+      "js/components/list-item.875402.js"
+    ],
+    "dependencies": []
+  },
+  "components/statSwiper": {
+    "js": [
+      "js/runtime.fcc0e4.js",
+      "js/259.958628.js",
+      "js/500.b1a1a7.js",
+      "js/components/statSwiper.96dc39.js"
+    ],
+    "dependencies": []
+  },
+  "components/teamModal": {
+    "js": [
+      "js/runtime.fcc0e4.js",
+      "js/703.9820c7.js",
+      "js/components/teamModal.e41bcb.js"
+    ],
+    "dependencies": []
+  }
+}

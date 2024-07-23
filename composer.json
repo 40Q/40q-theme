@@ -1,0 +1,38 @@
+{
+  "name": "40q/wp-theme",
+  "type": "wordpress-theme",
+  "authors": [
+    {
+      "name": "40q",
+      "email": "info@40q.agency"
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "haydenpierce/class-finder": "^0.4.3",
+    "40q/block-handler": "^1.0",
+    "stoutlogic/acf-builder": "^1.11",
+    "log1x/acf-composer": "^2.0",
+    "log1x/navi": "^2.0",
+    "ramsey/uuid": "^4.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "By40QTheme\\": "includes/classes/",
+      "App\\": "app/"
+    }
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.10",
+    "automattic/vipwpcs": "^3.0"
+  },
+  "scripts": {
+    "lint": "./vendor/bin/phpcs --standard=phpcs.xml",
+    "lint:fix": "./vendor/bin/phpcbf --standard=phpcs.xml"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}
