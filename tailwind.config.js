@@ -16,7 +16,8 @@ const config = {
 			sm: "576px",
 			md: "768px",
 			lg: "992px",
-			xl: "1440px",
+			xl: "1200px",
+			"2xl": "1400px",
 		},
 		fontSize: {},
 		colors: {},
@@ -43,10 +44,10 @@ const config = {
 						padding: "0",
 					},
 					"@screen xl": {
-						maxWidth: "1056px",
+						maxWidth: "1140px",
 					},
 					"@screen 2xl": {
-						maxWidth: "1056px",
+						maxWidth: "1320px",
 					},
 				},
 				".wide-container": {
