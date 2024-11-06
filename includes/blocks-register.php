@@ -37,7 +37,9 @@ function render_block($block_content, $block)
 	$blockName = $block['blockName'];
 	$handlerClass = $factory->getHandler($blockName);
 
-	$blockNameWithoutPrefix = explode('/', $blockName)[1];
+	$block_name = $block['blockName'];
+	$block_name_parts = explode('/', $block_name);
+	$block_name_without_prefix = isset($block_name_parts[1]) ? $block_name_parts[1] : '';
 
 	try {
 		if ($handlerClass) {
@@ -46,7 +48,7 @@ function render_block($block_content, $block)
 			extract($attributes);
 
 			ob_start();
-			include BY40Q_THEME_BLOCK_DIR . $blockNameWithoutPrefix . '.php';
+			include BY40Q_THEME_BLOCK_DIR . $block_name_without_prefix . '.php';
 			return ob_get_clean();
 		}
 	} catch (\Exception $e) {
