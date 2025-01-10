@@ -24,6 +24,7 @@ $is_local     = $is_local_env || $is_local_url;
 require_once BY40Q_THEME_INC . 'core.php';
 require_once BY40Q_THEME_INC . 'overrides.php';
 require_once BY40Q_THEME_INC . 'template-tags.php';
+require_once BY40Q_THEME_INC . 'filters.php';
 require_once BY40Q_THEME_INC . 'utility.php';
 require_once BY40Q_THEME_INC . 'blocks-register.php';
 require_once BY40Q_THEME_INC . 'helpers.php';
@@ -37,15 +38,4 @@ By40QTheme\BlocksRegister\setup();
 // Require Composer autoloader if it exists.
 if (file_exists(__DIR__ . '/vendor/autoload.php')) {
 	require_once __DIR__ . '/vendor/autoload.php';
-}
-
-if (!function_exists('wp_body_open')) {
-
-	/**
-	 * Shim for the new wp_body_open() function that was added in 5.2
-	 */
-	function wp_body_open()
-	{
-		do_action('wp_body_open');
-	}
 }
