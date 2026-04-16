@@ -1,11 +1,5 @@
-// image.tsx
 import { MediaUpload, MediaUploadCheck } from "@wordpress/block-editor";
-import {
-	Button,
-	Toolbar,
-	ToolbarButton,
-	ToggleControl,
-} from "@wordpress/components";
+import { Button, Toolbar, ToolbarButton } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
 import {
 	createDefaultAttributes,
@@ -13,7 +7,6 @@ import {
 	GetSetAttributesFunction,
 } from "scripts/editor/utils/type-mapping";
 import { useState, useRef, useEffect } from "react";
-import { imageStyles } from "scripts/editor/utils/imageStyles";
 
 /* Component attributes */
 export const attributes = {
@@ -29,27 +22,15 @@ export const attributes = {
 		type: "string",
 		default: "",
 	},
-	textPlaceholder: {
-		type: "string",
-		default: __("Select Image", "40q"),
-	},
-	blockType: {
-		type: "string",
-		default: "default",
-	},
-	mobileImage: {
-		type: "object",
-		default: {
-			url: "",
-			id: "",
-			alt: "",
-		},
-	},
-	hasDifferentMobileImage: {
-		type: "boolean",
-		default: false,
-	},
 } as const;
+
+/* Component styles */
+const styles = {
+	imageClasses: "",
+	imageContainer: "h-full relative",
+	imagePlaceholder:
+		"bg-black/60 text-xl text-center font-serif mx-auto flex items-center justify-center relative z-30 h-full text-white",
+};
 
 /* Component types */
 export type BlockAttributeValues = GetBlockAttributeValues<typeof attributes>;
@@ -65,7 +46,7 @@ export const Edit = ({
 	attributes: BlockAttributeValues;
 	setAttributes: SetAttributesFunction;
 }) => {
-	const { url, alt, textPlaceholder, blockType } = attributes;
+	const { url, alt } = attributes;
 
 	const [isHovered, setIsHovered] = useState(false);
 	const contentRef = useRef(null);
@@ -87,19 +68,17 @@ export const Edit = ({
 		setIsHovered(!isHovered);
 	};
 
-	const styles = imageStyles[blockType] || imageStyles.default;
-
 	return (
 		<>
 			<div
-				className={url ? styles?.imageContainer : "h-full w-full"}
+				className={styles?.imageContainer}
 				ref={contentRef}
 				onClick={handleToolbarToggle}
 			>
 				{url ? (
 					<>
 						<Toolbar
-							className={`absolute top-0 z-50 bg-white left-0 w-max ${
+							className={`absolute top-0 z-30 bg-white left-0 ${
 								isHovered ? "block" : "hidden"
 							}`}
 							label="option"
@@ -109,9 +88,9 @@ export const Edit = ({
 									onSelect={(image) =>
 										setAttributes({
 											...attributes,
-											url: image?.url,
-											alt: image?.alt,
-											id: String(image?.id),
+											url: image.url,
+											alt: image.alt,
+											id: String(image.id),
 										})
 									}
 									render={({ open }) => (
@@ -145,14 +124,14 @@ export const Edit = ({
 								onSelect={(image) =>
 									setAttributes({
 										...attributes,
-										url: image?.url,
-										alt: image?.alt,
-										id: String(image?.id),
+										url: image.url,
+										alt: image.alt,
+										id: String(image.id),
 									})
 								}
 								render={({ open }) => (
 									<Button variant="primary" onClick={open}>
-										{textPlaceholder ?? __("Select Image")}
+										{__("Select Image")}
 									</Button>
 								)}
 							/>
@@ -160,55 +139,6 @@ export const Edit = ({
 					</div>
 				)}
 			</div>
-		</>
-	);
-};
-
-export const Sidebar = ({
-	attributes,
-	setAttributes,
-}: {
-	attributes: BlockAttributeValues;
-	setAttributes: SetAttributesFunction;
-}) => {
-	const {
-		hasDifferentMobileImage,
-		mobileImage = {
-			url: "",
-			id: "",
-			alt: "",
-		},
-	} = attributes;
-
-	return (
-		<>
-			<ToggleControl
-				label={__("Has different mobile image")}
-				checked={!!hasDifferentMobileImage}
-				onChange={(value) => {
-					setAttributes({
-						...attributes,
-						hasDifferentMobileImage: value,
-					});
-				}}
-			/>
-
-			{hasDifferentMobileImage && (
-				<div className="mb-6">
-					<Edit
-						attributes={mobileImage as BlockAttributeValues}
-						setAttributes={(newAttributes) => {
-							setAttributes({
-								...attributes,
-								mobileImage: {
-									...mobileImage,
-									...newAttributes,
-								},
-							});
-						}}
-					/>
-				</div>
-			)}
 		</>
 	);
 };
