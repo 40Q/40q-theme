@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Theme
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up PHP with Composer
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer
+        env:
+          COMPOSER_AUTH_JSON: |
+            {
+              "http-basic": {
+                "connect.advancedcustomfields.com": {
+                  "username": "${{ secrets.ACF_PRO_KEY }}",
+                  "password": "${{ secrets.ACF_PRO_URL }}"
+                }
+              },
+              "github-oauth": {
+                "github.com": "${{ secrets.GITHUB_TOKEN }}"
+              }
+            }
+
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
+          cache-dependency-path: yarn.lock
+
+      - name: Install node dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build theme assets
+        run: yarn build
