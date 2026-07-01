@@ -1,0 +1,33 @@
+# Files and directories to exclude from deployment.
+#
+# When this file exists, deploy.sh empties every .gitignore in the build so
+# gitignored build artifacts (public/build, vendor) ARE deployed on the
+# `-built` branch. NOTE: composer.json must NOT be listed here — includes/core.php
+# gates class loading on its presence, so stripping it breaks the theme in prod.
+
+# Development-only files
+.editorconfig
+.eslintrc
+.eslintignore
+.stylelintignore
+.gitignore
+.lintstagedrc.json
+.nvmrc
+readme.md
+README.md
+auth.json
+auth.json.sample
+
+# PHP CodeSniffer configs
+.phpcs.xml.dist
+phpcs.xml
+.phpcs.xml
+
+# Build tooling / sources not needed at runtime
+node_modules/
+.github/
+resources/
+vite.config.js
+package.json
+yarn.lock
+tsconfig.json

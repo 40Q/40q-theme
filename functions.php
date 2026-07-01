@@ -10,8 +10,8 @@
 define('BY40Q_THEME_VERSION', '0.1.0');
 define('BY40Q_THEME_TEMPLATE_URL', get_template_directory_uri());
 define('BY40Q_THEME_PATH', get_template_directory() . '/');
-define('BY40Q_THEME_DIST_PATH', BY40Q_THEME_PATH . 'public/');
-define('BY40Q_THEME_DIST_URL', BY40Q_THEME_TEMPLATE_URL . '/public/');
+define('BY40Q_THEME_DIST_PATH', BY40Q_THEME_PATH . 'public/build/');
+define('BY40Q_THEME_DIST_URL', BY40Q_THEME_TEMPLATE_URL . '/public/build/');
 define('BY40Q_THEME_INC', BY40Q_THEME_PATH . 'includes/');
 define('BY40Q_THEME_BLOCK_DIR', BY40Q_THEME_PATH . 'resources/views/blocks/');
 define('BY40Q_THEME_COMPONENTS_DIR', BY40Q_THEME_PATH . 'resources/views/components/');
@@ -21,6 +21,7 @@ $is_local_env = in_array(wp_get_environment_type(), ['local', 'development'], tr
 $is_local_url = strpos(home_url(), '.test') || strpos(home_url(), '.local');
 $is_local     = $is_local_env || $is_local_url;
 
+require_once BY40Q_THEME_INC . 'vite.php';
 require_once BY40Q_THEME_INC . 'core.php';
 require_once BY40Q_THEME_INC . 'overrides.php';
 require_once BY40Q_THEME_INC . 'template-tags.php';

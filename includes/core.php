@@ -98,7 +98,13 @@ function theme_setup()
 	add_theme_support('custom-logo');
 
 	add_theme_support('editor-styles');
-	add_editor_style('dist/css/frontend.css');
+	// Inject the built front-end styles into the block editor (replaces the
+	// stale Bud-era `dist/css/frontend.css`). Resolve the hashed file via the
+	// Vite manifest and pass a theme-relative path so WordPress can inline it.
+	$app_css = \By40QTheme\Vite\manifest()['resources/styles/app.css']['file'] ?? null;
+	if ($app_css) {
+		add_editor_style('public/build/' . $app_css);
+	}
 
 	remove_theme_support('core-block-patterns');
 
@@ -127,15 +133,7 @@ function theme_setup()
  */
 function scripts()
 {
-	$entrypoints = json_decode(file_get_contents(BY40Q_THEME_DIST_PATH . 'entrypoints.json'), true);
-
-	foreach ($entrypoints['app']['js'] as $scriptName) {
-		wp_enqueue_script(
-			$scriptName,
-			BY40Q_THEME_DIST_PATH . $scriptName,
-			$entrypoints['app']['dependencies'],
-		);
-	}
+	\By40QTheme\Vite\enqueue_entry('resources/scripts/app.js');
 
 	remove_action('wp_body_open', 'wp_global_styles_render_svg_filters');
 }
@@ -147,15 +145,7 @@ function scripts()
  */
 function enqueue_block_editor_scripts()
 {
-	$entrypoints = json_decode(file_get_contents(BY40Q_THEME_DIST_PATH . 'entrypoints.json'), true);
-
-	foreach ($entrypoints['editor']['js'] as $scriptName) {
-		wp_enqueue_script(
-			$scriptName,
-			BY40Q_THEME_DIST_PATH . $scriptName,
-			$entrypoints['editor']['dependencies']
-		);
-	}
+	\By40QTheme\Vite\enqueue_entry('resources/scripts/editor.js', \By40QTheme\Vite\editor_dependencies());
 }
 
 /**
@@ -165,15 +155,7 @@ function enqueue_block_editor_scripts()
  */
 function admin_styles()
 {
-
-	$entrypoints = json_decode(file_get_contents(BY40Q_THEME_DIST_PATH . 'entrypoints.json'), true);
-
-	foreach ($entrypoints['editor']['css'] as $cssName) {
-		wp_enqueue_style(
-			$cssName,
-			BY40Q_THEME_DIST_PATH . $cssName
-		);
-	}
+	\By40QTheme\Vite\enqueue_entry('resources/styles/editor.css');
 }
 
 /**
@@ -183,16 +165,7 @@ function admin_styles()
  */
 function styles()
 {
-
-	$entrypoints = json_decode(file_get_contents(BY40Q_THEME_DIST_PATH . 'entrypoints.json'), true);
-
-	foreach ($entrypoints['app']['css'] as $cssName) {
-		wp_enqueue_style(
-			$cssName,
-			BY40Q_THEME_DIST_PATH . $cssName,
-			$entrypoints['app']['dependencies'],
-		);
-	}
+	\By40QTheme\Vite\enqueue_entry('resources/styles/app.css');
 }
 
 /**

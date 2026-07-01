@@ -31,6 +31,9 @@
     "lint:fix": "./vendor/bin/phpcbf --standard=phpcs.xml"
   },
   "config": {
+    "platform": {
+      "php": "8.2"
+    },
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true
     }

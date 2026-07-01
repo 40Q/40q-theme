@@ -1,11 +1,65 @@
-@import 'fonts.css';
+@import 'tailwindcss' theme(static);
+@import './fonts.css';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Content sources for utility scanning (PHP templates + JS/JSX). */
+@source '../../header.php';
+@source '../../footer.php';
+@source '../../index.php';
+@source '../../search.php';
+@source '../../searchform.php';
+@source '../../app/**/*.php';
+@source '../../partials/**/*.php';
+@source '../../resources/**/*.{php,js,jsx}';
 
-@layer base {
-    html {
-        /* font-family:  */
+/* Custom breakpoints (previously tailwind.config.js `screens`). */
+@theme {
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-2xl: 1400px;
+}
+
+/* Custom container components (previously the tailwind.config.js plugin). */
+@layer components {
+  .container,
+  .wide-container {
+    max-width: 100%;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 576px) {
+    .container,
+    .wide-container {
+      max-width: 540px;
+      padding: 0;
     }
+  }
+  @media (min-width: 768px) {
+    .container,
+    .wide-container {
+      max-width: 720px;
+      padding: 0;
+    }
+  }
+  @media (min-width: 992px) {
+    .container,
+    .wide-container {
+      max-width: 960px;
+      padding: 0;
+    }
+  }
+  @media (min-width: 1200px) {
+    .container {
+      max-width: 1140px;
+    }
+    .wide-container {
+      max-width: 1270px;
+    }
+  }
+  @media (min-width: 1400px) {
+    .container {
+      max-width: 1320px;
+    }
+  }
 }

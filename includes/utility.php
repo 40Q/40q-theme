@@ -94,7 +94,11 @@ function adjust_brightness($hex, $steps)
 
 function svg($name, $classes = '', $attrs = '')
 {
-	$manifest = json_decode(file_get_contents(BY40Q_THEME_DIST_PATH . 'manifest.json'), true);
-	$svg = file_get_contents(BY40Q_THEME_DIST_URL . $manifest["images/$name.svg"]); // phpcs:ignore WordPress.WP.AlternativeFunctions
+	$manifest = \By40QTheme\Vite\manifest();
+	$rel = $manifest["resources/images/$name.svg"]['file'] ?? null;
+	if (!$rel) {
+		return;
+	}
+	$svg = file_get_contents(BY40Q_THEME_DIST_PATH . $rel); // phpcs:ignore WordPress.WP.AlternativeFunctions
 	echo str_replace('<svg', '<svg class="' . $classes . '" ' . $attrs, $svg);
 }
